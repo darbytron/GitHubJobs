@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		60C2E5731C00B7E800E529A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5721C00B7E800E529A7 /* AppDelegate.swift */; };
-		60C2E5751C00B7E800E529A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5741C00B7E800E529A7 /* ViewController.swift */; };
 		60C2E5781C00B7E800E529A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60C2E5761C00B7E800E529A7 /* Main.storyboard */; };
 		60C2E57B1C00B7E800E529A7 /* GitHubJobs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5791C00B7E800E529A7 /* GitHubJobs.xcdatamodeld */; };
 		60C2E57D1C00B7E800E529A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60C2E57C1C00B7E800E529A7 /* Assets.xcassets */; };
 		60C2E5801C00B7E800E529A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60C2E57E1C00B7E800E529A7 /* LaunchScreen.storyboard */; };
 		60C2E58B1C00B7E800E529A7 /* GitHubJobsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E58A1C00B7E800E529A7 /* GitHubJobsTests.swift */; };
 		60C2E5961C00B7E800E529A7 /* GitHubJobsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5951C00B7E800E529A7 /* GitHubJobsUITests.swift */; };
+		60C2E5A51C00B83300E529A7 /* JobListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5A41C00B83300E529A7 /* JobListing.swift */; };
+		60C2E5A71C00BF4000E529A7 /* JobListingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5A61C00BF4000E529A7 /* JobListingsManager.swift */; };
+		60C2E5A91C00C6D600E529A7 /* JobListingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5A81C00C6D600E529A7 /* JobListingsTableViewController.swift */; };
+		60C2E5AD1C00C73F00E529A7 /* JobListingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2E5AB1C00C73F00E529A7 /* JobListingTableViewCell.swift */; };
+		60C2E5AE1C00C73F00E529A7 /* JobListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C2E5AC1C00C73F00E529A7 /* JobListingTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +41,6 @@
 /* Begin PBXFileReference section */
 		60C2E56F1C00B7E800E529A7 /* GitHubJobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubJobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C2E5721C00B7E800E529A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		60C2E5741C00B7E800E529A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		60C2E5771C00B7E800E529A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60C2E57A1C00B7E800E529A7 /* GitHubJobs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubJobs.xcdatamodel; sourceTree = "<group>"; };
 		60C2E57C1C00B7E800E529A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,11 @@
 		60C2E5911C00B7E800E529A7 /* GitHubJobsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubJobsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C2E5951C00B7E800E529A7 /* GitHubJobsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubJobsUITests.swift; sourceTree = "<group>"; };
 		60C2E5971C00B7E800E529A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60C2E5A41C00B83300E529A7 /* JobListing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobListing.swift; sourceTree = "<group>"; };
+		60C2E5A61C00BF4000E529A7 /* JobListingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobListingsManager.swift; sourceTree = "<group>"; };
+		60C2E5A81C00C6D600E529A7 /* JobListingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobListingsTableViewController.swift; sourceTree = "<group>"; };
+		60C2E5AB1C00C73F00E529A7 /* JobListingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobListingTableViewCell.swift; sourceTree = "<group>"; };
+		60C2E5AC1C00C73F00E529A7 /* JobListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobListingTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +107,12 @@
 		60C2E5711C00B7E800E529A7 /* GitHubJobs */ = {
 			isa = PBXGroup;
 			children = (
+				60C2E5B01C00C75A00E529A7 /* View */,
+				60C2E5AA1C00C70700E529A7 /* Controller */,
+				60C2E5A61C00BF4000E529A7 /* JobListingsManager.swift */,
+				60C2E5A31C00B81100E529A7 /* Model */,
 				60C2E5721C00B7E800E529A7 /* AppDelegate.swift */,
-				60C2E5741C00B7E800E529A7 /* ViewController.swift */,
-				60C2E5761C00B7E800E529A7 /* Main.storyboard */,
 				60C2E57C1C00B7E800E529A7 /* Assets.xcassets */,
-				60C2E57E1C00B7E800E529A7 /* LaunchScreen.storyboard */,
 				60C2E5811C00B7E800E529A7 /* Info.plist */,
 				60C2E5791C00B7E800E529A7 /* GitHubJobs.xcdatamodeld */,
 			);
@@ -126,6 +135,33 @@
 				60C2E5971C00B7E800E529A7 /* Info.plist */,
 			);
 			path = GitHubJobsUITests;
+			sourceTree = "<group>";
+		};
+		60C2E5A31C00B81100E529A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60C2E5A41C00B83300E529A7 /* JobListing.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		60C2E5AA1C00C70700E529A7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				60C2E5A81C00C6D600E529A7 /* JobListingsTableViewController.swift */,
+				60C2E5AB1C00C73F00E529A7 /* JobListingTableViewCell.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		60C2E5B01C00C75A00E529A7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				60C2E5761C00B7E800E529A7 /* Main.storyboard */,
+				60C2E57E1C00B7E800E529A7 /* LaunchScreen.storyboard */,
+				60C2E5AC1C00C73F00E529A7 /* JobListingTableViewCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C2E5AE1C00C73F00E529A7 /* JobListingTableViewCell.xib in Resources */,
 				60C2E5801C00B7E800E529A7 /* LaunchScreen.storyboard in Resources */,
 				60C2E57D1C00B7E800E529A7 /* Assets.xcassets in Resources */,
 				60C2E5781C00B7E800E529A7 /* Main.storyboard in Resources */,
@@ -259,9 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60C2E5751C00B7E800E529A7 /* ViewController.swift in Sources */,
+				60C2E5A51C00B83300E529A7 /* JobListing.swift in Sources */,
+				60C2E5A91C00C6D600E529A7 /* JobListingsTableViewController.swift in Sources */,
+				60C2E5AD1C00C73F00E529A7 /* JobListingTableViewCell.swift in Sources */,
 				60C2E57B1C00B7E800E529A7 /* GitHubJobs.xcdatamodeld in Sources */,
 				60C2E5731C00B7E800E529A7 /* AppDelegate.swift in Sources */,
+				60C2E5A71C00BF4000E529A7 /* JobListingsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
