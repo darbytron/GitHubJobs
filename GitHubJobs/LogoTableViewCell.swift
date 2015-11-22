@@ -10,6 +10,8 @@ import UIKit
 
 class LogoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var logoImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +22,6 @@ class LogoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     
 }

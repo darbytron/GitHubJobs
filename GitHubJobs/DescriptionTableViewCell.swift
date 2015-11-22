@@ -10,6 +10,8 @@ import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var jobDescriptionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

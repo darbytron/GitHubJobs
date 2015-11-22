@@ -13,13 +13,14 @@ class JobListing: NSObject {
     var jobID: String?
     var title: String?
     var location: String?
-    var jobDescription: String? //html
+    var jobDescription: String?
     var company: String?
-    var type: String?           //make this an enum
-    var howToApply: String?     //html link
+    var type: String?
+    var howToApply: String?
     var companyUrl: String?
     var companyLogoUrl: String?
     var jobListingUrl: String?
+    var cachedImage: UIImage?
     
     
     init(fromDictionary dict: NSDictionary){
@@ -53,8 +54,6 @@ class JobListing: NSObject {
         if  let j = dict["url"] as? String{
             self.jobListingUrl = j;
         }
-        
-        
     }
 }
 

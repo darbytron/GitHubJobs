@@ -10,7 +10,12 @@ import UIKit
 
 class JobTitleTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var jobTypeLocation: UILabel!
+    @IBOutlet weak var company: UILabel!
+    @IBOutlet weak var jobTitle: UILabel!
+    
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         // Initialization code
     }
