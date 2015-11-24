@@ -81,11 +81,11 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
         
         switch newIndex.row {
         case 0:
-            return createLogoCellForIndexPath(newIndex)
+            return createLogoCellForIndexPath()
         case 1:
-            return createTitleCellForIndexPath(newIndex)
+            return createTitleCellForIndexPath()
         case 2:
-            return createDescriptionCellForIndexPath(newIndex)
+            return createDescriptionCellForIndexPath()
         default:            
             return UITableViewCell()
         }
@@ -134,7 +134,7 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 44
+        return 64
     }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -150,8 +150,8 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
     
     // MARK: TableViewCell Customization
     
-    func createLogoCellForIndexPath(indexPath: NSIndexPath) -> LogoTableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(logoCellIdentifier, forIndexPath: indexPath) as! LogoTableViewCell
+    func createLogoCellForIndexPath() -> LogoTableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(logoCellIdentifier) as! LogoTableViewCell
         if let cachedImage = job?.cachedImage {
             cell.logoImageView.image = cachedImage
             
@@ -167,7 +167,7 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
                         activityIndicator.removeFromSuperview()
                         self.job?.cachedImage = logo
                         cell.logoImageView.image = logo
-                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.tableView.reloadData()
                     })
                 }
             } else {
@@ -178,16 +178,16 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    func createTitleCellForIndexPath(indexPath: NSIndexPath) -> JobTitleTableViewCell{
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(jobTitleCellIdentifier, forIndexPath: indexPath) as! JobTitleTableViewCell
+    func createTitleCellForIndexPath() -> JobTitleTableViewCell{
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(jobTitleCellIdentifier) as! JobTitleTableViewCell
         cell.jobTitle.text = job?.title
         cell.company.text = job?.company;
         cell.jobTypeLocation.text = (job?.type)! + " / " + (job?.location)!
         return cell
     }
     
-    func createDescriptionCellForIndexPath(indexPath: NSIndexPath) -> DescriptionTableViewCell{
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(descriptionCellIdentifier, forIndexPath: indexPath) as! DescriptionTableViewCell
+    func createDescriptionCellForIndexPath() -> DescriptionTableViewCell{
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(descriptionCellIdentifier) as! DescriptionTableViewCell
         do {
             let str = try NSAttributedString(data: (job?.jobDescription!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!)!, options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
             
