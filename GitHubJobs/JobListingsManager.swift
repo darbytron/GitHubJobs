@@ -11,13 +11,14 @@ import UIKit
 class JobListingsManager: NSObject {
     static let sharedInstance = JobListingsManager()
     var jobListings = [JobListing]()
-    var pageCount = 1
+    var pageCount = 0
     let baseURL = "https://jobs.github.com/positions.json?page=%d"
     private override init() {} //This prevents others from using the default '()' initializer for this class.
     
     
 
     func refreshJobListings(onCompletion: () -> Void) {
+        pageCount++
         let url = NSString(format: baseURL, pageCount)
         let request = NSMutableURLRequest(URL: NSURL(string: url as String)!)
         let session = NSURLSession.sharedSession()
@@ -37,7 +38,8 @@ class JobListingsManager: NSObject {
             do {
                 let jsonArray = try NSJSONSerialization.JSONObjectWithData(responseData,
                     options: []) as! NSArray
-                print(jsonArray.count)
+                
+                print(jsonArray.count);
                 for dict in jsonArray{
                     let job = JobListing.init(fromDictionary: dict as! NSDictionary);
                     self.jobListings.append(job)

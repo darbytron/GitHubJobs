@@ -9,18 +9,30 @@
 import UIKit
 
 class JobListingsTableViewController: UITableViewController {
-
+    var shouldFetch = true
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.navigationController?.navigationItem.title = "GitHub Jobs"
-        fetchJobs()
     }
     
     func fetchJobs() {
-        JobListingsManager.sharedInstance.refreshJobListings ({ () -> Void in
-            self.tableView.reloadData();
-        })
+        if shouldFetch as Bool {
+            let currentCount = JobListingsManager.sharedInstance.jobListings.count
+            JobListingsManager.sharedInstance.refreshJobListings ({ () -> Void in
+                if currentCount < JobListingsManager.sharedInstance.jobListings.count  {
+                    self.tableView.reloadData();
+                    self.shouldFetch = true
+                } else {
+                    self.shouldFetch = false
+                    let removeIndex = NSIndexPath(forRow: self.tableView.numberOfRowsInSection(0) - 1, inSection: 0);
+                    self.tableView.deleteRowsAtIndexPaths([removeIndex], withRowAnimation: UITableViewRowAnimation.Automatic)
+                }
+                
+            })
+        }
+        
         
     }
 
@@ -38,7 +50,11 @@ class JobListingsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return JobListingsManager.sharedInstance.jobListings.count + 1 //Add one for the loading cell
+        let numListings = JobListingsManager.sharedInstance.jobListings.count
+        if shouldFetch as Bool {
+            return numListings + 1//Add one for the loading cell
+        }
+        return numListings
     }
 
     
