@@ -12,35 +12,15 @@ class JobListingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NSDictionary *textTitleOptions =
-//            [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor],
-//                UITextAttributeTextColor,
-//                [UIColor whiteColor],
-//                UITextAttributeTextShadowColor, nil];
-//        
-//        [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
-//        textTitleOptions =
-//            [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor],
-//                UITextAttributeTextColor, nil];
-//        [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
-//        [[UIToolbar appearance] setTintColor:[UIColor redColor]];
-//        [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         
-        
-
         self.navigationController?.navigationItem.title = "GitHub Jobs"
         fetchJobs()
     }
     
     func fetchJobs() {
-        JobListingsManager.sharedInstance.refreshJobListings { (jobs: NSArray) -> Void in
+        JobListingsManager.sharedInstance.refreshJobListings ({ () -> Void in
             self.tableView.reloadData();
-        }
+        })
         
     }
 
@@ -58,20 +38,40 @@ class JobListingsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return JobListingsManager.sharedInstance.jobListings.count
+        return JobListingsManager.sharedInstance.jobListings.count + 1 //Add one for the loading cell
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewVellIdentifier")
-        let job = JobListingsManager.sharedInstance.jobListings[indexPath.row];
-        cell?.textLabel?.text = job.title;
-        cell?.detailTextLabel?.text = job.company! + " - " + job.location!
-
-        
+        if indexPath.row < JobListingsManager.sharedInstance.jobListings.count {
+            let job = JobListingsManager.sharedInstance.jobListings[indexPath.row];
+            cell?.textLabel?.text = job.title!;
+            cell?.detailTextLabel?.text = job.company! + " - " + job.location!
+            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        } else {
+            //Configure loading view
+            cell?.textLabel!.text = "Fetching jobs..."
+            cell?.detailTextLabel!.text = ""
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            activityIndicator.center = (cell?.center)!
+            
+            cell?.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+            
+        }
         return cell!
     }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == tableView.numberOfRowsInSection(0) - 1 {
+            fetchJobs()
+        }
+    }
+    
     
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

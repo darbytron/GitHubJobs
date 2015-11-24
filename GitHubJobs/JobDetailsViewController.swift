@@ -7,28 +7,55 @@
 //
 
 import UIKit
+import SafariServices
 
 class JobDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var job: JobListing?
+    var hasLogo: Bool!
+    var numberOfRows : Int?
     @IBOutlet var tableView: UITableView!
-    
-    @IBAction func applyTapped(sender: AnyObject) {
-    }
-
-    @IBAction func viewListingTapped(sender: AnyObject) {
-    }
     
     let logoCellIdentifier = "LogoCellIdentifier"
     let jobTitleCellIdentifier = "JobTitleCellIdentifier"
     let descriptionCellIdentifier = "DescriptionCellIdentifier"
-
-
-    let numberOfRows = 3
+    let logoHeight = CGFloat(160)
+    let titleHeight = CGFloat(100)
+    let descriptionHeight = CGFloat(83)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        if let _ = job!.companyLogoUrl {
+            hasLogo = true
+        } else {
+            hasLogo = false
+        }
+        if hasLogo as Bool {
+            numberOfRows = 3
+        } else {
+            numberOfRows = 2
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "viewCompanyTapped", name: "ViewCompanyTapped", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "viewJobListing", name: "ViewJobListing", object: nil)
+
+    }
+    
+    func viewCompanyTapped() {
+        if let url = job?.companyUrl {
+            let safariVC = SFSafariViewController(URL: NSURL(string: url)!)
+            self.presentViewController(safariVC, animated: true, completion: nil)
+        }
+        
+    }
+    func viewJobListing() {
+        if let url = job?.jobListingUrl {
+            let safariVC = SFSafariViewController(URL: NSURL(string: url)!)
+            self.presentViewController(safariVC, animated: true, completion: nil)
+        }
+        
     }
 
 
@@ -42,54 +69,86 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: - TableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows
+        return numberOfRows!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var newIndex = indexPath
         
-        switch(indexPath.row) {
+        if !(hasLogo as Bool) {
+            newIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: 0)
+        }
+        
+        switch newIndex.row {
         case 0:
-            return createLogoCellForIndexPath(indexPath)
+            return createLogoCellForIndexPath(newIndex)
         case 1:
-            return createTitleCellForIndexPath(indexPath)
+            return createTitleCellForIndexPath(newIndex)
         case 2:
-            return createDescriptionCellForIndexPath(indexPath)
-        default:
-            print("Didn't find the right cell")
+            return createDescriptionCellForIndexPath(newIndex)
+        default:            
             return UITableViewCell()
         }
+        
     }
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch(indexPath.row) {
+        var newIndex = indexPath
+        
+        if !(hasLogo as Bool) {
+            newIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: 0)
+        }
+        
+        
+        switch newIndex.row {
         case 0:
-            return 160
+            return logoHeight
         case 1:
-            return 100
+            return titleHeight
         case 2:
-            return 83
+            return descriptionHeight
         default:
             return 44
         }
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var newIndex = indexPath
         
-        switch(indexPath.row) {
+        if !(hasLogo as Bool) {
+            newIndex = NSIndexPath(forRow: indexPath.row + 1, inSection: 0)
+        }
+        
+        switch newIndex.row {
         case 0:
-            return 160
+            return logoHeight
         case 1:
-            return 100
+            return titleHeight
         case 2:
             return UITableViewAutomaticDimension
         default:
             return 44
         }
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 44
     }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return JobDetailsFooterView()
+    }
+    
+    
+    
+    
+    // MARK: TableViewCell Customization
     
     func createLogoCellForIndexPath(indexPath: NSIndexPath) -> LogoTableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(logoCellIdentifier, forIndexPath: indexPath) as! LogoTableViewCell
@@ -97,14 +156,22 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
             cell.logoImageView.image = cachedImage
             
         } else {
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            activityIndicator.center = cell.center
+            cell.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            
             if let urlString = job!.companyLogoUrl {
                 if let url = NSURL(string: urlString) {
                     JobListingsManager.sharedInstance.downloadImage(url, onComplete: { (logo) -> Void in
+                        activityIndicator.removeFromSuperview()
                         self.job?.cachedImage = logo
                         cell.logoImageView.image = logo
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     })
                 }
+            } else {
+                activityIndicator.removeFromSuperview();
             }
         }
         
@@ -132,9 +199,6 @@ class JobDetailsViewController: UIViewController, UITableViewDataSource, UITable
         }
         return cell
     }
-    
-    
-
 
     /*
     // MARK: - Navigation

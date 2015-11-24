@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JobDetailsFooterView" customModule="GitHubJobs" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="7Sv-Zj-foy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eso-nZ-zHN">
+                    <rect key="frame" x="8" y="0.0" width="92" height="64"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="92" id="y0h-IU-db4"/>
+                    </constraints>
+                    <state key="normal" title="View Listing">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="viewJobListing:" destination="-1" eventType="touchUpInside" id="bjf-ax-rQ0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOC-7K-jPa">
+                    <rect key="frame" x="209" y="0.0" width="103" height="64"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="103" id="8vS-vU-xuK"/>
+                        <constraint firstAttribute="width" constant="92" id="xV6-Vk-FAn"/>
+                    </constraints>
+                    <state key="normal" title="View Company">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="xV6-Vk-FAn"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="viewCompanyTapped:" destination="-1" eventType="touchUpInside" id="b55-gc-Nbj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.13725490200000001" green="0.41176470590000003" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="nOC-7K-jPa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MzW-gO-niz"/>
+                <constraint firstItem="eso-nZ-zHN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ng8-Zj-pjv"/>
+                <constraint firstItem="eso-nZ-zHN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="OSy-z5-Vq1"/>
+                <constraint firstAttribute="trailing" secondItem="nOC-7K-jPa" secondAttribute="trailing" constant="8" id="OV3-ad-5fS"/>
+                <constraint firstAttribute="bottom" secondItem="nOC-7K-jPa" secondAttribute="bottom" id="dTq-0h-g2e"/>
+                <constraint firstAttribute="bottom" secondItem="eso-nZ-zHN" secondAttribute="bottom" id="rbI-1b-9gw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="159" y="271"/>
+        </view>
+    </objects>
+</document>
